@@ -12,7 +12,7 @@ using System.Web.Configuration;
 
 namespace Homework.Services
 {
-    public class WeatherService
+    public class WeatherService : IWeatherService
     {
         private readonly string _apiKey;
 

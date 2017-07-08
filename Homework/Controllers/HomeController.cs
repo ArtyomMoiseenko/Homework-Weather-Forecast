@@ -2,20 +2,18 @@
 using Homework.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Homework.Controllers
 {
     public class HomeController : Controller
     {
-        private WeatherService weatherService;
+        private IWeatherService weatherService;
 
-        public HomeController()
+        public HomeController(IWeatherService service)
         {
-            weatherService = new WeatherService();
+            weatherService = service;
         }
 
         public ActionResult Index()
