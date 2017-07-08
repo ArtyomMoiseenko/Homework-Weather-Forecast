@@ -3,6 +3,7 @@ using Homework.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -23,11 +24,11 @@ namespace Homework.Controllers
         }
 
         [HttpPost]
-        public ActionResult Weather(string city, string countDays)
+        public async Task<ActionResult> Weather(string city, string countDays)
         {
             if (String.IsNullOrEmpty(city) || city == "Search city")
             {
-                return RedirectToAction("Index");
+                return JavaScript($"window.location = '{Url.Action("Index", "Home")}'");
             }
             var today = DateTime.Today;
             var date = new List<DateTime>();
@@ -40,13 +41,13 @@ namespace Homework.Controllers
             WeatherModel weather;
             try
             {
-                weather = weatherService.GetWeatherCity(city, countDays);
+                weather = await weatherService.GetWeatherCity(city, countDays);
             }
             catch(Exception)
             {
                 return View("Error");
             }
-            return View(weather);
+            return PartialView(weather);
         }
     }
 }

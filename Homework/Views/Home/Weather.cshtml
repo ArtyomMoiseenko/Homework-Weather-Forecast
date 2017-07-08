@@ -1,15 +1,11 @@
 ﻿@model Homework.Models.WeatherModel
 
-@{
-    ViewBag.Title = "Weather";
-}
-
 <div id="all">
-    <div class="detail-weather-temperature" @*col-xs-6 col-sm-3 d-inline*@>
+    <div class="detail-weather-temperature">
         <h2>@Model.City.Name, @Model.City.Country</h2>
         <img src="@Model.List.FirstOrDefault().Weather.FirstOrDefault().Icon" /><h3 class="text-right" id="inline">@((int)Model.List.FirstOrDefault().Temp.Day)&#8451;</h3>
         <h5>GPS (@Model.City.Coord.Lat; @Model.City.Coord.Lon)</h5>
-        <h5>@DateTime.Now</h5>
+        <h5>@DateTime.Now, @DateTime.Now.DayOfWeek</h5>
     </div>
     <table class="details">
         <tr>

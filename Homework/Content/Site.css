@@ -55,14 +55,14 @@ div.detail-weather-temperature {
     border-radius: 5px;
     vertical-align: top;
     display: inline-block;
-    color: dodgerblue;
+    color: lightblue;
     background-color: rgba(0,0,0,0.5);
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
     border: 1px solid rgba(255,255,255, 0.5);
     width: 60vw;
     min-width: 800px;
     padding: 5px;
-    border-collapse:collapse;
+    border-collapse: collapse;
 }
 
 .details th {
@@ -91,5 +91,5 @@ footer{
 }
 
 #all {
-    white-space:nowrap;
+    white-space: nowrap;
 }
