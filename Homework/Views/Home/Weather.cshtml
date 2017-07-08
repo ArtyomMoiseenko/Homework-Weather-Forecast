@@ -1,0 +1,45 @@
+﻿@model Homework.Models.WeatherModel
+
+@{
+    ViewBag.Title = "Weather";
+}
+
+<div id="all">
+    <div class="detail-weather-temperature" @*col-xs-6 col-sm-3 d-inline*@>
+        <h2>@Model.City.Name, @Model.City.Country</h2>
+        <img src="@Model.List.FirstOrDefault().Weather.FirstOrDefault().Icon" /><h3 class="text-right" id="inline">@((int)Model.List.FirstOrDefault().Temp.Day)&#8451;</h3>
+        <h5>GPS (@Model.City.Coord.Lat; @Model.City.Coord.Lon)</h5>
+        <h5>@DateTime.Now</h5>
+    </div>
+    <table class="details">
+        <tr>
+            <th>Date</th>
+            <th>Morning temperature</th>
+            <th>Afternoon temperature</th>
+            <th>Evening temperature</th>
+            <th>Night temperature</th>
+            <th>Weather</th>
+            <th>Atmosthheric thressure</th>
+            <th>Humidity</th>
+            <th>Wind stheed</th>
+            <th>Cloudiness</th>
+        </tr>
+        @{int i = 0; }
+        @foreach (var item in Model.List)
+        {
+            <tr>
+                <td>@ViewBag.Date[i].ToShortDateString()</td>
+                <td>@item.Temp.Morn&#8451;</td>
+                <td>@item.Temp.Day&#8451;</td>
+                <td>@item.Temp.Eve&#8451;</td>
+                <td>@item.Temp.Night&#8451;</td>
+                <td>@item.Weather.FirstOrDefault().Description</td>
+                <td>@item.Pressure hPa</td>
+                <td>@item.Humidity %</td>
+                <td>@item.Speed м/с</td>
+                <td>@item.Clouds %</td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>
