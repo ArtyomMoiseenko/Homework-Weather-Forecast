@@ -1,7 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-image: url(../fonts/background.jpg);
+    background-image: url(../fonts/background-opacity.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -59,17 +59,19 @@ div.detail-weather-temperature {
     background-color: rgba(0,0,0,0.5);
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
     border: 1px solid rgba(255,255,255, 0.5);
-    width: 60vw;
+    width: 65vw;
     min-width: 800px;
     padding: 5px;
     border-collapse: collapse;
+    text-align: center;
 }
 
 .details th {
     vertical-align: top;
     color: ghostwhite;
-    font-size:10pt;
-    white-space:normal;
+    font-size: 10pt;
+    text-align: center;
+    white-space: normal;
 }
 
 div.detail-weather {
@@ -92,4 +94,8 @@ footer{
 
 #all {
     white-space: nowrap;
+}
+
+.navbar-inverse{
+    border: none;
 }
