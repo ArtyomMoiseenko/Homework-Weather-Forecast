@@ -182,6 +182,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Coord.cs" />
     <Compile Include="Models\List.cs" />
+    <Compile Include="Models\LogModel.cs" />
     <Compile Include="Models\Temp.cs" />
     <Compile Include="Models\Weather.cs" />
     <Compile Include="Models\WeatherModel.cs" />
@@ -233,6 +234,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
+    <Content Include="Views\Home\UserQueriesLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

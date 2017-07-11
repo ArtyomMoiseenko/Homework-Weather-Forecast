@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Homework.Models.LogModel>
+
+@{
+    ViewBag.Title = "UserQueriesLog";
+}
+
+<table id="log-table" class="table">
+    <caption>History of queries users</caption>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pressure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpeedWind)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionWeather)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Humidity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clouds)
+        </th>
+    </tr>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperature) &#8451;
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pressure) hPa
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpeedWind) m/s
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionWeather)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Humidity) %
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clouds) %
+            </td>
+        </tr>
+    }
+}
+
+
+</table>

@@ -18,6 +18,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Forecast weather", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "navbar" })
+                @*@Html.ActionLink("History of queries users", "UserQueriesLog", "Home", new { area = "" }, new { @class = "navbar-brand", id = "navbar" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("History of queries users", "UserQueriesLog", "Home")</li>
+                </ul>
             </div>
         </div>
     </div>

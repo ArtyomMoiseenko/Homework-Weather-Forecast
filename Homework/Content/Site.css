@@ -99,3 +99,31 @@ footer{
 .navbar-inverse{
     border: none;
 }
+
+caption {
+    font-size: xx-large;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#log-table {
+    color: lightgoldenrodyellow;
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255, 0.5);
+    padding: 5px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#log-table th {
+    vertical-align: top;
+    color: ghostwhite;
+    font-size: 10pt;
+    text-align: center;
+    white-space: normal;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}

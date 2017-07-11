@@ -55,5 +55,32 @@ namespace Homework.Controllers
             }
             return PartialView(weather);
         }
+
+        public ActionResult UserQueriesLog()
+        {
+            IList<LogModel> log;
+            using (var db = new ForecastWeatherContext())
+            {
+                log = new List<LogModel>();
+                var forecasts = db.Forecasts.ToList();
+                foreach (var item in forecasts)
+                {
+                    log.Add(new LogModel()
+                    {
+                        Ip = db.HistoryQueries.FirstOrDefault(i => i.Id == item.HistoryQueryId).Ip,
+                        City = db.HistoryQueries.FirstOrDefault(i => i.Id == item.HistoryQueryId).City,
+                        Date = db.HistoryQueries.FirstOrDefault(i => i.Id == item.HistoryQueryId).Date,
+                        Temperature = item.Temperature,
+                        Humidity = item.Humidity,
+                        Pressure = item.Pressure,
+                        Clouds = item.Clouds,
+                        SpeedWind = item.SpeedWind,
+                        DescriptionWeather = item.DescriptionWeather
+                    });
+                }
+                    
+            }
+            return View(log);
+        }
     }
 }
