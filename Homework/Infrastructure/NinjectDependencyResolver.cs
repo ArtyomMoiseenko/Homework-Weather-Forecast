@@ -1,4 +1,5 @@
-﻿using Homework.Services;
+﻿using Homework.Database.DAL.UnitOfWork;
+using Homework.Services;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace Homework.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IWeatherService>().To<WeatherService>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }
 }

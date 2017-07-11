@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace Homework.Database
 {
-    public class ForecastWeatherInitializer : DropCreateDatabaseIfModelChanges<ForecastWeatherContext>
+    public class ForecastWeatherInitializer : CreateDatabaseIfNotExists<ForecastWeatherContext>
     {
         protected override void Seed(ForecastWeatherContext context)
         {

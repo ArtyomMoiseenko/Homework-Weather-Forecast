@@ -1,4 +1,4 @@
-﻿using Homework.Database;
+﻿using Homework.Database.DAL.UnitOfWork;
 using Homework.Database.Entities;
 using Homework.Models;
 using System;
@@ -18,31 +18,31 @@ namespace Homework.Filters
             var model = (WeatherModel)((PartialViewResult)filterContext.Result).Model;
             var forecasts = new List<Forecast>();
 
-            var log = new HistoryQuery()
+            using (var unitOfWork = new UnitOfWork())
             {
-                Ip = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress,
-                City = model.City.Name,
-                Date = DateTime.Now
-            };
-            for (int i = 0; i < count; i++)
-            {
-                forecasts.Add(new Forecast()
+                var log = new HistoryQuery()
                 {
-                    Temperature = model.List[i].Temp.Day,
-                    Pressure = model.List[i].Pressure,
-                    Humidity = model.List[i].Humidity,
-                    Clouds = model.List[i].Clouds,
-                    SpeedWind = model.List[i].Speed,
-                    DescriptionWeather = model.List[i].Weather.FirstOrDefault().Description,
-                    HistoryQueryId = log.Id
-                });
-            }
+                    Ip = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress,
+                    City = model.City.Name,
+                    Date = DateTime.Now
+                };
+                unitOfWork.HistoryRepository.Create(log);
 
-            using (var db = new ForecastWeatherContext())
-            {
-                db.HistoryQueries.Add(log);
-                db.Forecasts.AddRange(forecasts);
-                db.SaveChanges();
+                for (int i = 0; i < count; i++)
+                {
+                    var forecast = new Forecast()
+                    {
+                        Temperature = model.List[i].Temp.Day,
+                        Pressure = model.List[i].Pressure,
+                        Humidity = model.List[i].Humidity,
+                        Clouds = model.List[i].Clouds,
+                        SpeedWind = model.List[i].Speed,
+                        DescriptionWeather = model.List[i].Weather.FirstOrDefault().Description,
+                        HistoryQueryId = log.Id
+                    };
+                    unitOfWork.ForecastRepository.Create(forecast);
+                }
+                unitOfWork.Save();
             }
 
             base.OnActionExecuted(filterContext);

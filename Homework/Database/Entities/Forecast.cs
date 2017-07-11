@@ -10,7 +10,7 @@
         public int Humidity { get; set; }
         public int Clouds { get; set; }
 
-        public int? HistoryQueryId { get; set; }
+        public int HistoryQueryId { get; set; }
         public virtual HistoryQuery HistoryQuery { get; set; }
     }
 }

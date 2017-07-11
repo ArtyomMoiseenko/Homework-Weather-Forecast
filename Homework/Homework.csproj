@@ -170,11 +170,15 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Database\DAL\GenericRepository\GenericRepository.cs" />
     <Compile Include="Database\Entities\City.cs" />
     <Compile Include="Database\Entities\HistoryQuery.cs" />
     <Compile Include="Database\Entities\Forecast.cs" />
     <Compile Include="Database\ForecastWeatherContext.cs" />
     <Compile Include="Database\ForecastWeatherInitializer.cs" />
+    <Compile Include="Database\DAL\GenericRepository\IGenericRepository.cs" />
+    <Compile Include="Database\DAL\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Database\DAL\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
