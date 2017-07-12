@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Homework.Database.Entities.City>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table  id="cities-table" class="table">
+    <caption>Favorite cities <right>@Html.ActionLink("Add city", "Create", null, new { @class = "btn btn-default" })</right></caption>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit  ", "Edit", new { id = item.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+</table>
+
+

@@ -169,6 +169,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FavoriteCitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DAL\GenericRepository\GenericRepository.cs" />
     <Compile Include="Database\Entities\City.cs" />
@@ -239,6 +240,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
     <Content Include="Views\Home\UserQueriesLog.cshtml" />
+    <Content Include="Views\FavoriteCities\Create.cshtml" />
+    <Content Include="Views\FavoriteCities\Edit.cshtml" />
+    <Content Include="Views\FavoriteCities\Index.cshtml" />
+    <Content Include="Views\FavoriteCities\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
