@@ -1,4 +1,4 @@
-﻿@model Homework.Models.WeatherModel
+﻿@model IEnumerable<Homework.Models.CityModel>
 
 @{
     ViewBag.Title = "Forecast weather";
@@ -9,7 +9,7 @@
     {
         <input list="cities" type="text" value="Search city" name="city" class="form-control input-sm search" onclick="this.value = ''" />
         <datalist id="cities">
-            @foreach (var item in ViewBag.Cities)
+            @foreach (var item in Model)
             {
                 <option value="@item.Name" />
             }

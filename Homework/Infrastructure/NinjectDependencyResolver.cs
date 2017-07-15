@@ -1,8 +1,15 @@
-﻿using Homework.Database.DAL.UnitOfWork;
+﻿using Homework.Database;
+using Homework.Database.DAL.GenericRepository;
+using Homework.Database.DAL.UnitOfWork;
+using Homework.Database.Entities;
+using Homework.Filters;
 using Homework.Services;
 using Ninject;
+using Ninject.Web.Common;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace Homework.Infrastructure
@@ -29,7 +36,12 @@ namespace Homework.Infrastructure
 
         private void AddBindings()
         {
+            kernel.Bind<IConfiguration>().To<Configuration>()
+                .WithPropertyValue("BaseUrl", WebConfigurationManager.AppSettings["BaseUrl"])
+                .WithPropertyValue("ApiKey", WebConfigurationManager.AppSettings["ApiKey"]);
             kernel.Bind<IWeatherService>().To<WeatherService>();
+            kernel.Bind<DbContext>().To<ForecastWeatherContext>();
+            kernel.Bind(typeof(IGenericRepository<>)).To(typeof(GenericRepository<>));
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }

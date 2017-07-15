@@ -23,8 +23,10 @@ namespace Homework.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Cities = _unitOfWork.CityRepository.Get().ToList();
-            return View();
+            var cities = new List<CityModel>();
+            _unitOfWork.CityRepository.Get().ToList()
+                .ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
+            return View(cities);
         }
 
         [Log]

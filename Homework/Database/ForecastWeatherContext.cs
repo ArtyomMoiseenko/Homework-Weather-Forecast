@@ -5,7 +5,8 @@ namespace Homework.Database
 {
     public class ForecastWeatherContext : DbContext
     {
-        public ForecastWeatherContext() : base("ForecastWeatherContext")
+        public ForecastWeatherContext(string connectionString = "ForecastWeatherContext")
+            : base(connectionString)
         {
             System.Data.Entity.Database.SetInitializer<ForecastWeatherContext>(new ForecastWeatherInitializer());
             Database.Initialize(true);

@@ -1,5 +1,6 @@
 ﻿using Homework.Database.DAL.UnitOfWork;
-using Homework.Database.Entities;
+using Homework.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,7 +18,10 @@ namespace Homework.Controllers
         // GET: FavoriteCities
         public ActionResult Index()
         {
-            return View(_unitOfWork.CityRepository.Get().ToList());
+            var cities = new List<CityModel>();
+            _unitOfWork.CityRepository.Get().ToList()
+                .ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
+            return View(cities);
         }
 
         // GET: FavoriteCities/Create
@@ -28,11 +32,12 @@ namespace Homework.Controllers
 
         // POST: FavoriteCities/Create
         [HttpPost]
-        public ActionResult Create(City city)
+        public ActionResult Create(CityModel city)
         {
             try
             {
-                _unitOfWork.CityRepository.Create(city);
+                var newCity = new Homework.Database.Entities.City { Id = city.Id, Name = city.Name };
+                _unitOfWork.CityRepository.Create(newCity);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
@@ -45,16 +50,20 @@ namespace Homework.Controllers
         // GET: FavoriteCities/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(_unitOfWork.CityRepository.FindById(id));
+            var data = _unitOfWork.CityRepository.FindById(id);
+            var city = new CityModel() { Id = data.Id, Name = data.Name };
+            return View(city);
         }
 
         // POST: FavoriteCities/Edit/5
         [HttpPost]
-        public ActionResult Edit(City city)
+        public ActionResult Edit(CityModel city)
         {
             try
             {
-                _unitOfWork.CityRepository.Update(city);
+                var editCity = _unitOfWork.CityRepository.FindById(city.Id);
+                editCity.Name = city.Name;
+                _unitOfWork.CityRepository.Update(editCity);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
@@ -67,7 +76,9 @@ namespace Homework.Controllers
         // GET: FavoriteCities/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(_unitOfWork.CityRepository.FindById(id));
+            var data = _unitOfWork.CityRepository.FindById(id);
+            var city = new CityModel() { Id = data.Id, Name = data.Name };
+            return View(city);
         }
 
         // POST: FavoriteCities/Delete/5
@@ -83,7 +94,7 @@ namespace Homework.Controllers
             }
             catch
             {
-                return View();
+                return View("Delete");
             }
         }
 

@@ -1,12 +1,14 @@
 ﻿using Homework.Database.DAL.GenericRepository;
 using Homework.Database.Entities;
+using Ninject;
 using System;
+using System.Data.Entity;
 
 namespace Homework.Database.DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private ForecastWeatherContext _context = new ForecastWeatherContext();
+        private DbContext _context;
         private IGenericRepository<City> _cityRepository;
         private IGenericRepository<Forecast> _forecastRepository;
         private IGenericRepository<HistoryQuery> _historyRepository;
@@ -46,6 +48,11 @@ namespace Homework.Database.DAL.UnitOfWork
                 }
                 return _historyRepository;
             }
+        }
+
+        public UnitOfWork(DbContext context)
+        {
+            _context = context;
         }
 
         public void Save()
