@@ -9,14 +9,9 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 @Html.ActionLink("Forecast weather", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "navbar" })
             </div>
             <div class="navbar-collapse collapse">
@@ -26,15 +21,34 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>*@
+    <header id="flexbox-header">
+        <div>
+            @Html.ActionLink("Forecast weather", "Index", "Home", new { area = "" }, new { id = "logo" })
+        </div>
+        <div id="flexbox-menu">
+            <div>
+                @Html.ActionLink("History of queries users", "UserQueriesLog", "Home")
+            </div>
+            <div>
+                @Html.ActionLink("Favorite cities", "Index", "FavoriteCities")
+            </div>
+        </div>
+    </header>
     <div class="container body-content">
         <br />
         <br />
         <br />
-
-        @RenderBody()
-        <footer class="navbar-fixed-bottom">
-            <p>&copy; @DateTime.Now.Year – Homework in the Binary Studio Academy</p>
+        <div class="main-content">
+            @RenderBody()
+        </div>
+        <footer id="flexbox-footer">
+            <div>&copy; @DateTime.Now.Year – Homework in the Binary Studio Academy</div>
+            <div>
+                <p>Our office</p><hr />
+                <p>http://academy.binary-studio.com/</p>
+                <p>UA, Lviv</p>
+            </div>
         </footer>
     </div>
 

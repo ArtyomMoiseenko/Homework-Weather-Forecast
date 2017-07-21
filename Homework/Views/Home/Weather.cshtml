@@ -1,6 +1,6 @@
 ﻿@model Homework.Models.WeatherModel
 
-<div id="all">
+<div id="all flexbox">
     <div class="detail-weather-temperature">
         <h2>@Model.City.Name, @Model.City.Country</h2>
         <img src="@Model.List.FirstOrDefault().Weather.FirstOrDefault().Icon" /><h3 class="text-right" id="inline">@(Math.Round(Model.List.FirstOrDefault().Temp.Day))&#8451;</h3>

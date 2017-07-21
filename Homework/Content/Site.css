@@ -128,7 +128,7 @@ caption {
     color: white;
 }
 
-#cities-table {
+#cities {
     color: lightgoldenrodyellow;
     background-color: rgba(0,0,0,0.5);
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
@@ -136,22 +136,40 @@ caption {
     padding: 5px;
     border-collapse: collapse;
     text-align: center;
-    max-width: 40vw;
-    margin:auto;
+    width: 40vw;
+    margin: auto;
+    flex-direction: column;
 }
 
-#cities-table th {
-    vertical-align: top;
+#cities .flex {
     color: ghostwhite;
-    font-size: 10pt;
-    text-align: center;
     white-space: normal;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+    align-items: stretch;
+    width: 100%;
 }
+
+#cities hr {
+    color: ghostwhite;
+}
+
+#cities .flex > div {
+    font-size: 12pt;
+    flex-wrap: nowrap;
+    margin: 0.3vw 1vw;
+}
+
+#cities span {
+    font-size: 20pt;
+}
+
 
 .crud {
     border-radius: 5px;
     vertical-align: top;
-    display: inline-block;
     color: lightblue;
     background-color: rgba(0,0,0,0.5);
     box-shadow: 0 0 1px rgba(0,0,0,0.5);
@@ -161,6 +179,9 @@ caption {
     padding: 5px;
     border-collapse: collapse;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .crud h2{
@@ -170,4 +191,88 @@ caption {
 
 .crud a{
     color: ghostwhite;
+}
+
+/*Flexbox*/
+#flexbox-header {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0, 255, 0, 0.5);
+    padding: 0 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+#flexbox-menu {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#flexbox-menu div {
+    margin: 0 10px;
+}
+
+#flexbox-menu div a {
+    color: white;
+    font-size: 13pt;
+}
+
+#flexbox-menu div a:hover {
+    background-color: white;
+    color: navy;     
+    text-decoration: none;
+    border-radius: 10%;
+    transition: all 0.5s ease-out;
+}
+
+#logo {
+    font-size: 30pt;
+    color: white;
+}
+
+#logo:hover {
+    background-color: white;
+    color: navy;
+    text-decoration: none;
+    border-radius: 10%;
+    transition: all 0.5s ease-out;
+}
+
+.main-content .flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.main-content form div {
+    margin: 0 1vw;
+}
+
+#flexbox-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#flexbox-footer div{
+    text-align: right;
+}
+
+#flexbox-footer hr {
+    padding: 0;
+    margin: 0;
+}
+
+#flexbox-footer div:last-child p:first-child{
+    font-size: 13pt;
 }
