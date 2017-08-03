@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Homework.Database.DAL.GenericRepository
 {
@@ -17,19 +18,19 @@ namespace Homework.Database.DAL.GenericRepository
             _dbSet = context.Set<TEntity>();
         }
 
-        public TEntity FindById(int id)
+        public async Task<TEntity> FindById(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public IEnumerable<TEntity> Get()
+        public async Task<IEnumerable<TEntity>> Get()
         {
-            return _dbSet.AsNoTracking().ToList();
+            return await _dbSet.AsNoTracking().ToListAsync();
         }
 
-        public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+        public async Task<IEnumerable<TEntity>> Get(Func<TEntity, bool> predicate)
         {
-            return _dbSet.AsNoTracking().Where(predicate).ToList();
+            return await _dbSet.AsNoTracking().Where(predicate).AsQueryable().ToListAsync();
         }
 
         public void Create(TEntity item)

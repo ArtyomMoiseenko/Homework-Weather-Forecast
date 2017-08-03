@@ -21,11 +21,11 @@ namespace Homework.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var cities = new List<CityModel>();
-            _unitOfWork.CityRepository.Get().ToList()
-                .ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
+            var citiesDB = await _unitOfWork.CityRepository.Get();
+            citiesDB.ToList().ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
             return View(cities);
         }
 
@@ -57,17 +57,18 @@ namespace Homework.Controllers
             return PartialView(weather);
         }
 
-        public ActionResult UserQueriesLog()
+        public async Task<ActionResult> UserQueriesLog()
         {
             var log = new List<LogModel>();
-            var forecasts = _unitOfWork.ForecastRepository.Get().ToList();
+            var forecasts = await _unitOfWork.ForecastRepository.Get();
             foreach (var item in forecasts)
             {
+                var logDb = await _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId);
                 log.Add(new LogModel()
                 {
-                    Ip = _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId).Ip,
-                    City = _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId).City,
-                    Date = _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId).Date,
+                    Ip = logDb.Ip,
+                    City = logDb.City,
+                    Date = logDb.Date,
                     Temperature = item.Temperature,
                     Humidity = item.Humidity,
                     Pressure = item.Pressure,

@@ -17,7 +17,7 @@ namespace Homework.Api
         [HttpGet]
         public async Task<IHttpActionResult> GetWeather(string nameCity, int countDays)
         {
-            var city = await _service.GetJsonResponse(nameCity, countDays.ToString());
+            var city = await _service.GetWeatherCity(nameCity, countDays.ToString());
             if (city == null)
             {
                 return NotFound();

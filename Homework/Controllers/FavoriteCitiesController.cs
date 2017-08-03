@@ -2,6 +2,7 @@
 using Homework.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Homework.Controllers
@@ -16,11 +17,11 @@ namespace Homework.Controllers
         }
 
         // GET: FavoriteCities
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var cities = new List<CityModel>();
-            _unitOfWork.CityRepository.Get().ToList()
-                .ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
+            var citiesDB = await _unitOfWork.CityRepository.Get();
+            citiesDB.ToList().ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
             return View(cities);
         }
 
@@ -48,20 +49,20 @@ namespace Homework.Controllers
         }
 
         // GET: FavoriteCities/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var data = _unitOfWork.CityRepository.FindById(id);
+            var data = await _unitOfWork.CityRepository.FindById(id);
             var city = new CityModel() { Id = data.Id, Name = data.Name };
             return View(city);
         }
 
         // POST: FavoriteCities/Edit/5
         [HttpPost]
-        public ActionResult Edit(CityModel city)
+        public async Task<ActionResult> Edit(CityModel city)
         {
             try
             {
-                var editCity = _unitOfWork.CityRepository.FindById(city.Id);
+                var editCity = await _unitOfWork.CityRepository.FindById(city.Id);
                 editCity.Name = city.Name;
                 _unitOfWork.CityRepository.Update(editCity);
                 _unitOfWork.Save();
@@ -74,9 +75,9 @@ namespace Homework.Controllers
         }
 
         // GET: FavoriteCities/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var data = _unitOfWork.CityRepository.FindById(id);
+            var data = await _unitOfWork.CityRepository.FindById(id);
             var city = new CityModel() { Id = data.Id, Name = data.Name };
             return View(city);
         }
@@ -84,11 +85,12 @@ namespace Homework.Controllers
         // POST: FavoriteCities/Delete/5
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult DeletePost(int id)
+        public async Task<ActionResult> DeletePost(int id)
         {
             try
             {
-                _unitOfWork.CityRepository.Remove(_unitOfWork.CityRepository.FindById(id));
+                var city = await _unitOfWork.CityRepository.FindById(id);
+                _unitOfWork.CityRepository.Remove(city);
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
             }

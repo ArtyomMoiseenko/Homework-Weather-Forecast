@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Homework.Database.DAL.GenericRepository
 {
@@ -7,9 +8,9 @@ namespace Homework.Database.DAL.GenericRepository
         where TEntity : class
     {
         void Create(TEntity item);
-        TEntity FindById(int id);
-        IEnumerable<TEntity> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        Task<TEntity> FindById(int id);
+        Task<IEnumerable<TEntity>> Get();
+        Task<IEnumerable<TEntity>> Get(Func<TEntity, bool> predicate);
         void Remove(TEntity item);
         void Update(TEntity item);
     }

@@ -2,6 +2,7 @@
 using Homework.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Homework.Api
@@ -17,24 +18,24 @@ namespace Homework.Api
 
         // GET: api/Cities
         [HttpGet]
-        public IHttpActionResult GetCities()
+        public async Task<IHttpActionResult> GetCities()
         {
             var cities = new List<CityModel>();
-            var data = _unitOfWork.CityRepository.Get().ToList();
+            var data = await _unitOfWork.CityRepository.Get();
             if(data == null)
             {
                 return NotFound();
             }
-            data.ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
+            data.ToList().ForEach(i => cities.Add(new CityModel { Id = i.Id, Name = i.Name }));
 
             return Ok(cities);
         }
 
         // GET: api/Cities/5
         [HttpGet]
-        public IHttpActionResult GetCity(int id)
+        public async Task<IHttpActionResult> GetCity(int id)
         {
-            var data = _unitOfWork.CityRepository.FindById(id);
+            var data = await _unitOfWork.CityRepository.FindById(id);
             if (data == null)
             {
                 return NotFound();
@@ -45,39 +46,39 @@ namespace Homework.Api
 
         // POST: api/Cities
         [HttpPost]
-        public IHttpActionResult CreateCity([FromBody]CityModel city)
+        public async Task<IHttpActionResult> CreateCity([FromBody]CityModel city)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             _unitOfWork.CityRepository.Create(new Database.Entities.City { Id = city.Id, Name = city.Name });
-            _unitOfWork.Save();
+            await _unitOfWork.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = city.Id }, city);
         }
 
         // PUT: api/Cities/5
         [HttpPut]
-        public IHttpActionResult EditCity(int id, [FromBody]CityModel city)
+        public async Task<IHttpActionResult> EditCity(int id, [FromBody]CityModel city)
         {
             if (id == city.Id)
             {
                 _unitOfWork.CityRepository.Update(new Database.Entities.City { Id = city.Id, Name = city.Name });
-                _unitOfWork.Save();
+                await _unitOfWork.Save();
             }
             return Ok(city);
         }
 
         // DELETE: api/Cities/5
         [HttpDelete]
-        public void DeleteCity(int id)
+        public async Task DeleteCity(int id)
         {
-            var city = _unitOfWork.CityRepository.FindById(id);
+            var city = await _unitOfWork.CityRepository.FindById(id);
             if (city != null)
             {
                 _unitOfWork.CityRepository.Remove(city);
-                _unitOfWork.Save();
+                await _unitOfWork.Save();
             }
         }
 

@@ -2,6 +2,7 @@
 using Homework.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Homework.Api
@@ -17,17 +18,19 @@ namespace Homework.Api
 
         // GET: api/Log
         [HttpGet]
-        public IHttpActionResult GetLogs()
+        public async Task<IHttpActionResult> GetLogs()
         {
             var log = new List<LogModel>();
-            var forecasts = _unitOfWork.ForecastRepository.Get().ToList();
+            var forecasts = await _unitOfWork.ForecastRepository.Get();
+            var forecastsweather = forecasts.ToList();
             foreach (var item in forecasts)
             {
+                var logData = await _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId);
                 log.Add(new LogModel()
                 {
-                    Ip = _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId).Ip,
-                    City = _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId).City,
-                    Date = _unitOfWork.HistoryRepository.FindById(item.HistoryQueryId).Date,
+                    Ip = logData.Ip,
+                    City = logData.City,
+                    Date = logData.Date,
                     Temperature = item.Temperature,
                     Humidity = item.Humidity,
                     Pressure = item.Pressure,

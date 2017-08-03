@@ -1,6 +1,7 @@
 ﻿using Homework.Database.DAL.GenericRepository;
 using Homework.Database.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace Homework.Database.DAL.UnitOfWork
 {
@@ -12,6 +13,6 @@ namespace Homework.Database.DAL.UnitOfWork
 
         IGenericRepository<HistoryQuery> HistoryRepository { get; }
 
-        void Save();
+        Task Save();
     }
 }

@@ -3,6 +3,7 @@ using Homework.Database.Entities;
 using Ninject;
 using System;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace Homework.Database.DAL.UnitOfWork
 {
@@ -55,9 +56,9 @@ namespace Homework.Database.DAL.UnitOfWork
             _context = context;
         }
 
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         protected virtual void Dispose(bool disposing)
